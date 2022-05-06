@@ -2,6 +2,7 @@ import React from 'react';
 
 const BubbleSort = (arrLength) => {
     let array = [];
+    let parallelSortedArr = [];
     let sortedArr = [];
 
     const generateRandomInteger = (max) => {
@@ -13,14 +14,48 @@ const BubbleSort = (arrLength) => {
             let randomNumber = generateRandomInteger(500);
             array.push(randomNumber);
         };
-        return sortedArr = [...array];
+        parallelSortedArr = [...array];
+        sortedArr = [...array];
     };
 
     const sortArray = () => {
         generateRandomArray();
 
+        // parallel bubble sort algorithm
+        
+        let sorted = 0;
+
+        while( sorted == 0) {
+            sorted = 1;
+            console.log("odd")
+            for( let j = 0; j < arrLength - 1; j+=2) {
+                console.log(`j: ${j}`)
+                if (parallelSortedArr[j] > parallelSortedArr[j+1]) {
+                    let temp = parallelSortedArr[j];
+                    parallelSortedArr[j] = parallelSortedArr[j+1];
+                    parallelSortedArr[j+1] = temp;
+                    sorted = 0;
+                }
+                console.log(parallelSortedArr, sorted)
+                
+            }
+            console.log("even")
+            for( let j = 1; j < arrLength - 1; j+=2) {
+                console.log(`j: ${j}`)
+                if (parallelSortedArr[j] > parallelSortedArr[j+1]) {
+                    let temp = parallelSortedArr[j];
+                    parallelSortedArr[j] = parallelSortedArr[j+1];
+                    parallelSortedArr[j+1] = temp;
+                    sorted = 0;
+                }
+                console.log(parallelSortedArr, sorted)
+            }
+        }
+
+        // bubble sort
+
         for( let i = 0; i < arrLength - 1; i++) {
-            for( let j = 0; j < arrLength - i - 1; j++) {
+            for( let j = 0; j < arrLength - 1 - i ; j++) {
                 if (sortedArr[j] > sortedArr[j+1]) {
                     let temp = sortedArr[j];
                     sortedArr[j] = sortedArr[j+1];
@@ -28,12 +63,12 @@ const BubbleSort = (arrLength) => {
                 }
             }
         }
-        return sortedArr;
     };
 
     sortArray();
-    console.log(array);
-    console.log(sortedArr);
+    console.log(`Array before sorting: ${array}`);
+    console.log(`Parallel bubble sort algorithm: ${parallelSortedArr}`);
+    console.log(`Bubble sort: ${sortedArr}`);
 
     return (
         <>
