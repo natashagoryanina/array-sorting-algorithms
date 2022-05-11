@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import BubbleSort from '../algorithms/BubbleSort';
 import MergeSort from '../algorithms/MergeSort';
+import ArrayPageContainer from './ArrayPageStyled';
 
 const ArrayPage = () => {
     const [arrLength, setArrLength] = useState("");
@@ -19,9 +20,9 @@ const ArrayPage = () => {
     const MergeAlgorithm = () => {
         setMergeAlgorithm(true);
     };
-
+    
     return (
-        <section>
+        <ArrayPageContainer>
             <form className='form'>
                 <label className='form-label'>
                     Enter an array length, please:
@@ -40,18 +41,20 @@ const ArrayPage = () => {
             <button 
                 type='button'
                 onClick={BubbleAlgorithm}
+                className='btn'
             >
                 Bubble Sort
             </button>
             <button 
                 type='button'
                 onClick={MergeAlgorithm}
+                className='btn'
             >
                 Merge Sort
             </button>
             {bubbleAlgorithm && <BubbleSort arrLength={arrLength}/>}
             {mergeAlgorithm && <MergeSort arrLength={arrLength}/>}
-        </section>
+        </ArrayPageContainer>
     );
 };
 
