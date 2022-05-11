@@ -33,44 +33,34 @@ const BubbleSort = ({arrLength}) => {
     const sortArray = () => {
         generateRandomArray();
 
-        // parallel bubble sort algorithm
+        //! Parallel Bubble Sort 
         let sorted = 0;
 
         startTimeParallel = Date.now();
-        console.log(startTimeParallel);
-
+        
         while( sorted == 0) {
             sorted = 1;
-            //console.log("odd")
             for( let j = 0; j < arrLength - 1; j+=2) {
-                //console.log(`j: ${j}`)
                 if (parallelSortedArr[j] > parallelSortedArr[j+1]) {
                     let temp = parallelSortedArr[j];
                     parallelSortedArr[j] = parallelSortedArr[j+1];
                     parallelSortedArr[j+1] = temp;
                     sorted = 0;
                 }
-                //console.log(parallelSortedArr, sorted)
-                
             }
-            //console.log("even")
             for( let j = 1; j < arrLength - 1; j+=2) {
-                //console.log(`j: ${j}`)
                 if (parallelSortedArr[j] > parallelSortedArr[j+1]) {
                     let temp = parallelSortedArr[j];
                     parallelSortedArr[j] = parallelSortedArr[j+1];
                     parallelSortedArr[j+1] = temp;
                     sorted = 0;
                 }
-                //console.log(parallelSortedArr, sorted)
             }
         }
         endTimeParallel = Date.now() - startTimeParallel;
-        console.log(`miliseconds parallel: ${endTimeParallel}`);
 
-        // bubble sort
+        //! Bubble Sort
         startTimeOriginal = Date.now();
-        console.log(startTimeOriginal);
 
         for( let i = 0; i < arrLength - 1; i++) {
             for( let j = 0; j < arrLength - 1 - i ; j++) {
@@ -79,21 +69,15 @@ const BubbleSort = ({arrLength}) => {
                     sortedArr[j] = sortedArr[j+1];
                     sortedArr[j+1] = temp;
                 }
-                //console.log(sortedArr);
             }
         }
 
         endTimeOriginal = Date.now() - startTimeOriginal;
-        console.log(`miliseconds regular: ${endTimeOriginal}`); 
 
         calculateAcceleration(endTimeParallel, endTimeOriginal);
     };
 
     sortArray();
-    console.log(`Array before sorting: ${array}`);
-    console.log(`Parallel bubble sort algorithm: ${parallelSortedArr}`);
-    console.log(`Bubble sort: ${sortedArr}`);
-    console.log(`acceleration: ${acceleration}`);
 
     return (
         <section>

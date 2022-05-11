@@ -4,19 +4,20 @@ import MergeSort from '../algorithms/MergeSort';
 
 const ArrayPage = () => {
     const [arrLength, setArrLength] = useState("");
-    const [algorithm, setAlgorithm] = useState(false);
+    const [bubbleAlgorithm, setBubbleAlgorithm] = useState(false);
+    const [mergeAlgorithm, setMergeAlgorithm] = useState(false);
 
     const onFormChange = (e) => {
         const { value } = e.target;
         setArrLength(value);
     };
 
-    const sendData = () => {
-        setAlgorithm(true);
+    const BubbleAlgorithm = () => {
+        setBubbleAlgorithm(true);
     };
 
     const MergeAlgorithm = () => {
-        MergeSort(arrLength);
+        setMergeAlgorithm(true);
     };
 
     return (
@@ -38,7 +39,7 @@ const ArrayPage = () => {
             </form>
             <button 
                 type='button'
-                onClick={sendData}
+                onClick={BubbleAlgorithm}
             >
                 Bubble Sort
             </button>
@@ -48,7 +49,8 @@ const ArrayPage = () => {
             >
                 Merge Sort
             </button>
-            {algorithm && <BubbleSort arrLength={arrLength}/>}
+            {bubbleAlgorithm && <BubbleSort arrLength={arrLength}/>}
+            {mergeAlgorithm && <MergeSort arrLength={arrLength}/>}
         </section>
     );
 };
