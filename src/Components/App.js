@@ -1,10 +1,10 @@
 import React from 'react';
-import SortingPage from './sort/SortingPage';
+import ArrayPage from './array/ArrayPage';
 
 const App = () => {
     return (
         <main>
-            <SortingPage/>
+            <ArrayPage/>
         </main>
     );
 };

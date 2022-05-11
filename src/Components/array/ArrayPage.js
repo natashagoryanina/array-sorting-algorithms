@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import BubbleSort from '../algorithms/BubbleSort';
+import MergeSort from '../algorithms/MergeSort';
 
-const SortingPage = () => {
+const ArrayPage = () => {
     const [arrLength, setArrLength] = useState("");
+    const [algorithm, setAlgorithm] = useState(false);
 
     const onFormChange = (e) => {
         const { value } = e.target;
@@ -10,7 +12,11 @@ const SortingPage = () => {
     };
 
     const sendData = () => {
-        BubbleSort(arrLength);
+        setAlgorithm(true);
+    };
+
+    const MergeAlgorithm = () => {
+        MergeSort(arrLength);
     };
 
     return (
@@ -21,7 +27,7 @@ const SortingPage = () => {
                     <input
                         type='number'
                         min='5'
-                        max='500'
+                        max='5000'
                         value={arrLength}
                         name='arrLength'
                         onChange={onFormChange}
@@ -38,11 +44,13 @@ const SortingPage = () => {
             </button>
             <button 
                 type='button'
+                onClick={MergeAlgorithm}
             >
-                Selection Sort
+                Merge Sort
             </button>
+            {algorithm && <BubbleSort arrLength={arrLength}/>}
         </section>
     );
 };
 
-export default SortingPage;
+export default ArrayPage;
