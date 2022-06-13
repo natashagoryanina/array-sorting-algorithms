@@ -1,17 +1,6 @@
-import React, { useState } from 'react';
-import RenderPage from '../render/RenderPage';
+import React from 'react';
 
-const initialState = {
-    sortname: "Bubble Sort",
-    arrayLength: 0,
-    originalSortingTime: 0,
-    parallelSortingTime: 0,
-    sortAcceleration: 0
-};
-
-const BubbleSort = ({arrLength}) => {
-
-    let algorithm = false;
+const BubbleSortDB = (arrayLength) => {
     let array = [];
     let parallelSortedArr = [];
     let sortedArr = [];
@@ -26,7 +15,7 @@ const BubbleSort = ({arrLength}) => {
     };
 
     const generateRandomArray = () => {
-        for (let i = 0; i < arrLength; i++) {
+        for (let i = 0; i < arrayLength; i++) {
             let randomNumber = generateRandomInteger(10000);
             array.push(randomNumber);
         };
@@ -36,7 +25,6 @@ const BubbleSort = ({arrLength}) => {
 
     const calculateAcceleration = (endTimeParallel, endTimeOriginal) => {
         acceleration = Math.round(endTimeOriginal / endTimeParallel); 
-        algorithm = true;
     };
 
     const sortArray = () => {
@@ -49,7 +37,7 @@ const BubbleSort = ({arrLength}) => {
         
         while( sorted == 0) {
             sorted = 1;
-            for( let j = 0; j < arrLength - 1; j+=2) {
+            for( let j = 0; j < arrayLength - 1; j+=2) {
                 if (parallelSortedArr[j] > parallelSortedArr[j+1]) {
                     let temp = parallelSortedArr[j];
                     parallelSortedArr[j] = parallelSortedArr[j+1];
@@ -57,7 +45,7 @@ const BubbleSort = ({arrLength}) => {
                     sorted = 0;
                 }
             }
-            for( let j = 1; j < arrLength - 1; j+=2) {
+            for( let j = 1; j < arrayLength - 1; j+=2) {
                 if (parallelSortedArr[j] > parallelSortedArr[j+1]) {
                     let temp = parallelSortedArr[j];
                     parallelSortedArr[j] = parallelSortedArr[j+1];
@@ -71,8 +59,8 @@ const BubbleSort = ({arrLength}) => {
         //! Bubble Sort
         startTimeOriginal = Date.now();
 
-        for( let i = 0; i < arrLength - 1; i++) {
-            for( let j = 0; j < arrLength - 1 - i ; j++) {
+        for( let i = 0; i < arrayLength - 1; i++) {
+            for( let j = 0; j < arrayLength - 1 - i ; j++) {
                 if (sortedArr[j] > sortedArr[j+1]) {
                     let temp = sortedArr[j];
                     sortedArr[j] = sortedArr[j+1];
@@ -82,28 +70,15 @@ const BubbleSort = ({arrLength}) => {
         }
 
         endTimeOriginal = Date.now() - startTimeOriginal;
-
         calculateAcceleration(endTimeParallel, endTimeOriginal);
     };
 
     sortArray();
-
-    return (
-        <section>
-            {algorithm && 
-                <RenderPage 
-                    algorithmName={"Bubble Sort"}
-                    parallelAlgorithmName={"Parallel Bubble Sort"}
-                    originalArray={array}
-                    sortedArray={sortedArr}
-                    parallelSortedArray={parallelSortedArr}
-                    timeParallel={endTimeParallel}
-                    timeOriginal={endTimeOriginal}
-                    acceleration={acceleration}
-                />
-            }
-        </section>
-    );
+    return {
+            "timeOriginal": endTimeOriginal, 
+            "timeParallel": endTimeParallel, 
+            "acceleration": acceleration
+        };
 };
 
-export default BubbleSort;
+export default BubbleSortDB;

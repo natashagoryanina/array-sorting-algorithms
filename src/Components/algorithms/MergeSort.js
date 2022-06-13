@@ -18,7 +18,7 @@ const MergeSort = ({arrLength}) => {
 
     const generateRandomArray = () => {
         for (let i = 0; i < arrLength; i++) {
-            let randomNumber = generateRandomInteger(2000);
+            let randomNumber = generateRandomInteger(10000);
             array.push(randomNumber);
         };
         arrayMerge = [...array];
@@ -26,7 +26,7 @@ const MergeSort = ({arrLength}) => {
     };
 
     const calculateAcceleration = (endTimeMerge, endTimeBitonic) => {
-        acceleration = Math.round(endTimeBitonic / endTimeMerge); 
+        acceleration = Math.round(endTimeMerge / endTimeBitonic); 
         algorithm = true;
     };
 
